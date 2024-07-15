@@ -4,10 +4,10 @@ const imageContainer = document.querySelector('.image-container');
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const searchTerm = form.elements.query.value;
-    const config = { params: { q: searchTerm } };
-    const res = await axios.get(`https://api.tvmaze.com/search/shows`, config);
+    const res = await fetch(`https://api.tvmaze.com/search/shows?q=${searchTerm}`);
+    const data = await res.json();
     clearImages();
-    makeImages(res.data);
+    makeImages(data);
     form.elements.query.value = '';
 });
 
